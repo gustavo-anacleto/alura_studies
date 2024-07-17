@@ -1,4 +1,4 @@
-export default interface Task{
+export default interface ITaskModel{
     title: string,
-    time: Date
+    time: string
 }
