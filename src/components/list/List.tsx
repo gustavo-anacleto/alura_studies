@@ -6,7 +6,15 @@ import ITaskModel from "../../models/task.model";
 function List({ tasks }: { tasks: ITaskModel[] }) {
   function loadTasks() {
     return tasks.map((task, index) => (
-      <Task key={index} title={task.title} time={task.time} />
+      <Task
+        key={index}
+        task={task}
+      //  id={task.id}
+      // title={task.title}
+      // time={task.time}
+      // selected={task.selected}
+      // completed={task.completed}
+      />
     ));
   }
 

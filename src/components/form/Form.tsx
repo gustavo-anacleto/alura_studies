@@ -3,11 +3,12 @@ import { useState } from "react";
 import Button from "../button/Button";
 import style from "./Form.module.scss";
 import ITaskModel from "../../models/task.model";
+import {v4 as uuid} from 'uuid';
 
 function Form({ setTasks }: { setTasks: Function }) {
-  const initialState: ITaskModel = { title: "", time: "00:00" };
+  const initialState = { title: "", time: "00:00" };
 
-  const [formState, setFormState] = useState<ITaskModel>(initialState);
+  const [formState, setFormState] = useState(initialState);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -16,7 +17,18 @@ function Form({ setTasks }: { setTasks: Function }) {
 
   function saveTask(e: FormEvent) {
     e.preventDefault();
-    setTasks((tasks: ITaskModel[]) => [...tasks, formState]);
+
+    setTasks((tasks: ITaskModel[]) => [
+      ...tasks,
+      {
+        ...formState,
+        id: uuid(),
+        selected: false,
+        completed: false,
+      }
+    ]);
+
+    setFormState(initialState);
   }
 
   return (
