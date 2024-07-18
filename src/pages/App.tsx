@@ -14,11 +14,24 @@ function App() {
     { id: uuid(), title: "Angular", time: "00:30:00", selected: false, completed: false },
   ];
   const [tasks, setTasks] = useState(initialState);
+  const [selectedTask, setSelectedTask] = useState<ITaskModel>();
+
+  function selectTask(task: ITaskModel){
+    setSelectedTask(task);
+    setTaskAsSelected(task);
+  }
+
+  function setTaskAsSelected(taskToSelect: ITaskModel){
+    setTasks(tasks => tasks.map((task) => ({
+      ...task,
+      selected: task.id === taskToSelect.id ? true : false
+    })))
+  }
   
   return (
     <div className={style.appStyle}>
       <Form setTasks={setTasks} />
-      <List tasks={tasks} />
+      <List tasks={tasks} selectTask={selectTask} />
       <Timer />
     </div>
   );

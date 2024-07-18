@@ -3,17 +3,13 @@ import style from "./List.module.scss";
 import Task from "./task/Task";
 import ITaskModel from "../../models/task.model";
 
-function List({ tasks }: { tasks: ITaskModel[] }) {
+function List({ tasks, selectTask }: { tasks: ITaskModel[], selectTask: Function }) {
   function loadTasks() {
     return tasks.map((task, index) => (
       <Task
         key={index}
         task={task}
-      //  id={task.id}
-      // title={task.title}
-      // time={task.time}
-      // selected={task.selected}
-      // completed={task.completed}
+        selectTask={selectTask}
       />
     ));
   }
