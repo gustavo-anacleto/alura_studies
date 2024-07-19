@@ -3,5 +3,5 @@ export default interface ITaskModel{
     title: string,
     time: string,
     selected: boolean,
-    completed: false
+    completed: boolean
 }
